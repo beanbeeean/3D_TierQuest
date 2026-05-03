@@ -44,9 +44,10 @@ public class CameraController : MonoBehaviour
     private void FollowTarget()
     {
         Quaternion rotation = Quaternion.Euler(_xRotation, _yRotation, 0);
-        float distance = Mathf.Abs(_offset.z); 
-        Vector3 dir = new Vector3(0, 0, -distance);
-        transform.position = _target.position + (rotation * dir) + (Vector3.up * _offset.y);
+        Vector3 rotatedOffset = rotation * _offset;
+
+        transform.position = _target.position + rotatedOffset;
+
         transform.LookAt(_target.position);
     }
 }
