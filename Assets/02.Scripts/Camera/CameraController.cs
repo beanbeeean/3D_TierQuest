@@ -5,7 +5,9 @@ public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target; 
     [SerializeField] private Vector3 _offset = new Vector3(0, 2, -6);
-    [SerializeField] private float _sensitivity = 0.1f; 
+    [SerializeField] private float _sensitivity = 0.1f;
+    [SerializeField] private float _minRotationX = 0f;
+    [SerializeField] private float _maxRotationX = 60f;
     
     private float _xRotation;
     private float _yRotation;
@@ -37,7 +39,7 @@ public class CameraController : MonoBehaviour
             _mouseDelta = Mouse.current.delta.ReadValue();
             _yRotation += _mouseDelta.x * _sensitivity;
             _xRotation -= _mouseDelta.y * _sensitivity;
-            _xRotation = Mathf.Clamp(_xRotation, 10f, 80f);
+            _xRotation = Mathf.Clamp(_xRotation, _minRotationX, _maxRotationX);
         }
     }
 
