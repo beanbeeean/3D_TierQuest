@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded => _grounded;
 
     private Transform _cameraTransform;
+    public Action attackAction;
 
     void Awake()
     {
@@ -85,6 +87,11 @@ public class PlayerController : MonoBehaviour
             _appliedSpeed = _walkSpeed;
         }
     }
+
+    void OnAttack()
+    {
+        attackAction?.Invoke();
+    }
     
     void CheckGround()
     {
@@ -106,5 +113,6 @@ public class PlayerController : MonoBehaviour
         if (string.IsNullOrWhiteSpace(actionName)) return null;
         return _playerInput.actions.FindAction(actionName, false);
     }
+    
 
 }

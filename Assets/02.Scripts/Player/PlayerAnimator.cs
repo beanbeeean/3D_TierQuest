@@ -7,6 +7,7 @@ public class PlayerAnimator : MonoBehaviour
 
     private readonly int _moveSpeedHash = Animator.StringToHash("MoveSpeed");
     private readonly int _isGroundedHash = Animator.StringToHash("IsGrounded");
+    private readonly int _attackTriggerHash = Animator.StringToHash("AttackTrigger");
 
     void Awake()
     {
@@ -14,11 +15,26 @@ public class PlayerAnimator : MonoBehaviour
         _controller = GetComponent<PlayerController>();
     }
 
+    void OnEnable()
+    {
+        _controller.attackAction += AttackAnimator;
+    }
+
+    void OnDisable()
+    {
+        _controller.attackAction -= AttackAnimator;
+    }
+
     void Update()
     {
         float currentSpeed = _controller.MoveVector.magnitude > 0 ? _controller.AppliedSpeed : 0;
         _anim.SetFloat(_moveSpeedHash, currentSpeed, 0.1f, Time.deltaTime);
         _anim.SetBool(_isGroundedHash, _controller.IsGrounded);
+    }
+
+    void AttackAnimator()
+    {
+        _anim.SetTrigger(_attackTriggerHash);
     }
 
 
