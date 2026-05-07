@@ -1,18 +1,32 @@
 using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
 
 public class PlayerAttacking : MonoBehaviour
 {
     private PlayerController _controller;
-    [SerializeField] private GameObject _meleePoint;
-    private bool _isCooldown = false;
+    private PlayerAnimator _animator;
+    private Hitbox _hitbox;
+
+    [SerializeField] private GameObject _hitBoxObject;
+    [SerializeField] private float _hitBoxActiveTime = 0.2f;
     [SerializeField] private float _cooldownTimer = 3f;
-    private float _timer = 0f;
+    [SerializeField] private int _damage = 10;
+
+    private bool _isCooldown = false;
+
+    public int Damage => _damage;
+    public bool IsCooldown => _isCooldown;
 
     void Awake()
     {
         _controller = GetComponent<PlayerController>();
+        _animator = GetComponent<PlayerAnimator>();
+        _hitbox = _hitBoxObject.GetComponent<Hitbox>();
+
+        if (_hitBoxObject != null)
+        {
+            _hitBoxObject.SetActive(false);
+        }
     }
 
     void OnEnable()
@@ -25,22 +39,25 @@ public class PlayerAttacking : MonoBehaviour
         _controller.attackAction -= MeleeAttack;
     }
 
-    void MeleeAttack()
+    private void MeleeAttack()
     {
         if (_isCooldown) return;
+
+        _animator.AttackAnimator();
         StartCoroutine(AttackRoutine());
     }
-    
-    IEnumerator AttackRoutine()
+
+    private IEnumerator AttackRoutine()
     {
         _isCooldown = true;
-        // 데미지 주는거 불러와야됨 (Enemy 만들어서)
-        
-        while (_timer < _cooldownTimer)
-        {
-            _timer += Time.deltaTime;
-            yield return null;
-        }
+        _hitbox.ClearHitEnemies();
+        _hitBoxObject.SetActive(true);
+
+        yield return new WaitForSeconds(_hitBoxActiveTime);
+
+        _hitBoxObject.SetActive(false);
+
+        yield return new WaitForSeconds(_cooldownTimer);
 
         _isCooldown = false;
     }

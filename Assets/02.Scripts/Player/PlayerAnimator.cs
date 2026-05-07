@@ -15,15 +15,6 @@ public class PlayerAnimator : MonoBehaviour
         _controller = GetComponent<PlayerController>();
     }
 
-    void OnEnable()
-    {
-        _controller.attackAction += AttackAnimator;
-    }
-
-    void OnDisable()
-    {
-        _controller.attackAction -= AttackAnimator;
-    }
 
     void Update()
     {
@@ -32,7 +23,7 @@ public class PlayerAnimator : MonoBehaviour
         _anim.SetBool(_isGroundedHash, _controller.IsGrounded);
     }
 
-    void AttackAnimator()
+    public void AttackAnimator()
     {
         _anim.SetTrigger(_attackTriggerHash);
     }

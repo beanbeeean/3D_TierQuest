@@ -96,11 +96,10 @@ public class PlayerController : MonoBehaviour
     void CheckGround()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 1f))
+        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2f))
         {
             if (((1 << hit.collider.gameObject.layer) & _floorLayer) != 0)
             {
-                Debug.Log("붙어있음");
                 _grounded = true;
                 return;
             }
