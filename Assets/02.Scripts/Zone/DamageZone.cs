@@ -3,7 +3,7 @@ using UnityEngine;
 public class DamageZone : MonoBehaviour
 {
     [SerializeField] private int _damageValue = 20;
-    [SerializeField] private float _cooldownTimer = 3f;
+    [SerializeField] private float _cooldownTimer = 1f;
     [SerializeField] private LayerMask _playerLayer;
 
     float _timer = 0f;

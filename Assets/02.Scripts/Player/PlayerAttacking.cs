@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,23 +6,28 @@ public class PlayerAttacking : MonoBehaviour
 {
     private PlayerController _controller;
     private PlayerAnimator _animator;
+    private PlayerStatus _status;
     private Hitbox _hitbox;
 
     [SerializeField] private GameObject _hitBoxObject;
     [SerializeField] private float _hitBoxActiveTime = 0.2f;
     [SerializeField] private float _cooldownTimer = 3f;
     [SerializeField] private int _damage = 10;
+    [SerializeField] private float _attackStamina = 10f;
 
     private bool _isCooldown = false;
 
     public int Damage => _damage;
     public bool IsCooldown => _isCooldown;
 
+    public Action attackEvent;
+
     void Awake()
     {
         _controller = GetComponent<PlayerController>();
         _animator = GetComponent<PlayerAnimator>();
         _hitbox = _hitBoxObject.GetComponent<Hitbox>();
+        _status = GetComponent<PlayerStatus>();
 
         if (_hitBoxObject != null)
         {
@@ -41,9 +47,10 @@ public class PlayerAttacking : MonoBehaviour
 
     private void MeleeAttack()
     {
+        if (_status.CurrentSt <= _attackStamina) return;
         if (_isCooldown) return;
 
-        _animator.AttackAnimator();
+        attackEvent?.Invoke();
         StartCoroutine(AttackRoutine());
     }
 
@@ -52,6 +59,7 @@ public class PlayerAttacking : MonoBehaviour
         _isCooldown = true;
         _hitbox.ClearHitEnemies();
         _hitBoxObject.SetActive(true);
+        _status.ConsumeStamina(_attackStamina);
 
         yield return new WaitForSeconds(_hitBoxActiveTime);
 

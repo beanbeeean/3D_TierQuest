@@ -3,7 +3,7 @@ using UnityEngine;
 public class HealZone : MonoBehaviour
 {
     [SerializeField] private int _healValue = 20;
-    [SerializeField] private float _cooldownTimer = 3f;
+    [SerializeField] private float _cooldownTimer = 1f;
     [SerializeField] private LayerMask _playerLayer;
 
     float _timer = 0f;
