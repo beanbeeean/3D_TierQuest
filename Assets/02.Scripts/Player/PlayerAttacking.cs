@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerAttacking : MonoBehaviour
 {
     private PlayerController _controller;
-    private PlayerAnimator _animator;
     private PlayerStatus _status;
     private Hitbox _hitbox;
 
@@ -25,7 +24,6 @@ public class PlayerAttacking : MonoBehaviour
     void Awake()
     {
         _controller = GetComponent<PlayerController>();
-        _animator = GetComponent<PlayerAnimator>();
         _hitbox = _hitBoxObject.GetComponent<Hitbox>();
         _status = GetComponent<PlayerStatus>();
 
