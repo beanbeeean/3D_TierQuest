@@ -23,6 +23,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _jumpStaminaValue = 10f;
     [SerializeField] private bool _grounded = true;
+
+    [SerializeField] private float _groundCheckRadius = 0.3f;
+
+    
     
 
     private int _floorLayer = 1 << 8;
@@ -124,19 +128,10 @@ public class PlayerController : MonoBehaviour
 
         
     }
-    
+
     void CheckGround()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 2f))
-        {
-            if (((1 << hit.collider.gameObject.layer) & _floorLayer) != 0)
-            {
-                _grounded = true;
-                return;
-            }
-        }
-        _grounded = false;
+        _grounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _floorLayer);
     }
 
     private InputAction FindAction(string actionName)

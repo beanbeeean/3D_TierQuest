@@ -77,10 +77,7 @@ public class PlayerStatus : MonoBehaviour
     public void Heal(int hp)
     {
         _currentHP += hp;
-        if (_currentHP > _maxHP)
-        {
-            _currentHP = _maxHP;
-        }
+        _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
         changeHpEvent?.Invoke(_currentHP);
     }
 
@@ -89,6 +86,7 @@ public class PlayerStatus : MonoBehaviour
         if (IsDead) return;
 
         _currentHP -= dmg;
+        _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
         changeHpEvent?.Invoke(_currentHP);
 
         if (IsDead)

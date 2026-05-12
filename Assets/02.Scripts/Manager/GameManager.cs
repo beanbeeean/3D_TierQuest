@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _respawnPoint;
     [SerializeField] private GameObject _restartPanel;
     [SerializeField] private EnemyStatus _enemyStatus;
+    [SerializeField] private CameraController _cameraController;
 
     private bool _isGameOver;
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
         _playerStatus.ResetStatus();
         _enemyStatus.ResetStatus();
+        _cameraController.ResetCamera();
         _playerInput.SwitchCurrentActionMap("Player");
         _restartPanel.SetActive(false);
     }

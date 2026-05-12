@@ -15,10 +15,18 @@ public class CameraController : MonoBehaviour
     private Vector2 _mouseDelta;
     private bool _isRotating = false;
 
+    private float _initialXRotation;
+    private float _initialYRotation;
+    private Vector3 _initialOffset;
+
     void Start()
     {
         _xRotation = transform.eulerAngles.x;
         _yRotation = transform.eulerAngles.y;
+
+        _initialXRotation = _xRotation;
+        _initialYRotation = _yRotation;
+        _initialOffset = _offset;
     }
 
     void LateUpdate()
@@ -51,5 +59,14 @@ public class CameraController : MonoBehaviour
         transform.position = _target.position + rotatedOffset;
 
         transform.LookAt(_target.position);
+    }
+
+    public void ResetCamera()
+    {
+        _xRotation = _initialXRotation;
+        _yRotation = _initialYRotation;
+        _offset = _initialOffset;
+
+        FollowTarget();
     }
 }
