@@ -31,6 +31,6 @@ public class Potion : MonoBehaviour
             _itemSpawner.SpawnItem();
         }
 
-        Destroy(gameObject);
+        _itemSpawner.InactiveItem();
     }
 }
