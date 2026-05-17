@@ -35,7 +35,11 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded => _grounded;
 
     private Transform _cameraTransform;
+    [SerializeField] private float _cameraSpeed = 5f;
     public Action attackAction;
+    public Action inventoryAction;
+
+    [SerializeField] private InventoryUI _inventory;
 
     void Awake()
     {
@@ -75,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         if (moveDir != Vector3.zero)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir.normalized), 0.2f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir.normalized), Time.fixedDeltaTime * _cameraSpeed);
         }
     }
     
@@ -102,7 +106,13 @@ public class PlayerController : MonoBehaviour
 
     void OnAttack()
     {
+        if (_inventory.IsOpened) return;
         attackAction?.Invoke();
+    }
+
+    void OnInventory()
+    {
+        inventoryAction?.Invoke();
     }
 
     void HandleRunStamina()

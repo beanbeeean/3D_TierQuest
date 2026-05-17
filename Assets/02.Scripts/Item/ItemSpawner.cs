@@ -3,21 +3,24 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject _potionPrefab;
+    [SerializeField] private GameObject _prefab;
     [SerializeField] private float _cooldownTimer = 5f;
 
-    private GameObject _potion;
+    private GameObject _item;
     private Coroutine _spawnCoroutine;
 
     void Start()
     {
-        _potion = Instantiate(_potionPrefab, transform);
-        _potion.SetActive(true);
+        _item = Instantiate(_prefab, transform);
+        _item.SetActive(true);
+
+        Item item = _item.GetComponentInChildren<Item>();
+        item.Initialize(this);
     }
 
     public void InactiveItem()
     {
-        _potion.SetActive(false);
+        _item.SetActive(false);
     }
 
     public void SpawnItem()
@@ -34,9 +37,9 @@ public class ItemSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(_cooldownTimer);
 
-        _potion.transform.localPosition = Vector3.zero;
-        _potion.transform.localRotation = Quaternion.identity;
-        _potion.SetActive(true);
+        _item.transform.localPosition = Vector3.zero;
+        _item.transform.localRotation = Quaternion.identity;
+        _item.SetActive(true);
 
         _spawnCoroutine = null;
     }

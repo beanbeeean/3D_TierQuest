@@ -27,6 +27,7 @@ public class PlayerStaminaUIController : MonoBehaviour
     }
     public void UpdateStHUD(float _value)
     {
+        // Debug.Log($"{_value} 호출");
         _stSlider.value = Mathf.RoundToInt(_value);
         _stValueTxt.text = Mathf.RoundToInt(_value).ToString();
     }

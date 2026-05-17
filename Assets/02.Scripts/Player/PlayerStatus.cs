@@ -77,7 +77,7 @@ public class PlayerStatus : MonoBehaviour
     public void Heal(int hp)
     {
         _currentHP += hp;
-        _currentHP = Mathf.Clamp(_currentHP, 0, _maxHP);
+        _currentHP = Mathf.Min(_currentHP, _maxHP);
         changeHpEvent?.Invoke(_currentHP);
     }
 
@@ -120,6 +120,14 @@ public class PlayerStatus : MonoBehaviour
     public void RechargeStamina()
     {
         _currentSt += Time.deltaTime * _rechargeStValue;
+        _currentSt = Mathf.Clamp(_currentSt, 0, _maxSt);
+        changeStaminaEvent?.Invoke(_currentSt);
+    }
+
+    public void HealStamina(int value)
+    {
+        _currentSt += value;
+        _currentSt = Mathf.Min(_currentSt, _maxSt);
         changeStaminaEvent?.Invoke(_currentSt);
     }
     
