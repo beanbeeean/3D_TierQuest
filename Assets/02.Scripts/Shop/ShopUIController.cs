@@ -10,6 +10,7 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private InventoryUI _inventoryUI;
     [SerializeField] private TextMeshProUGUI _amountText;
     [SerializeField] private TextMeshProUGUI _popupText;
+    [SerializeField] private TextMeshProUGUI _totalPriceText;
     [SerializeField] private float _popupTimer = 2f;
     [SerializeField] private ShopPopupData[] _popupDatas;
 
@@ -125,6 +126,17 @@ public class ShopUIController : MonoBehaviour
     private void UpdateAmountText()
     {
         _amountText.text = _amount.ToString();
+
+        if (_currentItem == null)
+        {
+            _totalPrice = 0;
+        }
+        else
+        {
+            _totalPrice = _currentItem.price * _amount;
+        }
+
+        _totalPriceText.text = $"Total Price : {_totalPrice}G";
     }
 
     private void InitalizeData()

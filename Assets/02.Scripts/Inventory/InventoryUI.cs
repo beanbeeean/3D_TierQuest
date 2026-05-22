@@ -65,7 +65,7 @@ public class InventoryUI : MonoBehaviour
 
     public void ToggleInventory()
     {
-        Debug.Log("현재 상태 : " + _isOpened);
+        Debug.Log("기존 상태 : " + _isOpened);
         if (_isOpened)
         {
             CloseInventory();

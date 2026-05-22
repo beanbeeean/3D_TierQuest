@@ -29,7 +29,8 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetTestGold()
     {
-        AddGold(0);
+        // 테스트용
+        AddGold(9999);
     }
 
     public void AddItem(ItemData itemData, int amount)
