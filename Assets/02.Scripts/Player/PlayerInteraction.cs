@@ -4,7 +4,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] private float _interactDistance = 5f;
     [SerializeField] private LayerMask _interactableLayer;
-    [SerializeField] private Transform _rayOrigin;
+    [SerializeField] private Transform _rayStartPoint;
 
     private PlayerController _controller;
     private IInteractable _currentInteractable;
@@ -31,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void DetectInteractable()
     {
-        Ray ray = new Ray(_rayOrigin.position, _rayOrigin.forward);
+        Ray ray = new Ray(_rayStartPoint.position, _rayStartPoint.forward);
 
         if (Physics.Raycast(ray, out RaycastHit hit, _interactDistance, _interactableLayer))
         {
@@ -47,13 +47,11 @@ public class PlayerInteraction : MonoBehaviour
                     _currentInteractable.ActivatePopup();
                 }
 
-                Debug.DrawRay(_rayOrigin.position, _rayOrigin.forward * _interactDistance, Color.green);
                 return;
             }
         }
 
         ClearCurrentInteractable();
-        Debug.DrawRay(_rayOrigin.position, _rayOrigin.forward * _interactDistance, Color.red);
     }
 
     private void TryInteract()

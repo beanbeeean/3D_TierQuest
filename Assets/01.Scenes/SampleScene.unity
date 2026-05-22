@@ -3641,8 +3641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 34.7, y: 27.5928}
-  m_SizeDelta: {x: 153.3545, y: 17.2026}
+  m_AnchoredPosition: {x: 27.9, y: 29.2838}
+  m_SizeDelta: {x: 185.242, y: 20.5846}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &649107866
 MonoBehaviour:
@@ -9194,10 +9194,10 @@ RectTransform:
   - {fileID: 996174460}
   m_Father: {fileID: 1858428180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -60}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1456391685
 MonoBehaviour:
@@ -10800,10 +10800,10 @@ RectTransform:
   - {fileID: 1928607733}
   m_Father: {fileID: 1858428180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 130, y: -60}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1752742681
 MonoBehaviour:
@@ -10998,7 +10998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1783071117
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11080,12 +11080,20 @@ MonoBehaviour:
   - {fileID: 1456391688}
   - {fileID: 1752742684}
   _inventory: {fileID: 1965090841}
-  _amountText: {fileID: 1076401757}
   _inventoryUI: {fileID: 817752284}
+  _amountText: {fileID: 1076401757}
   _popupText: {fileID: 649107866}
-  _successMsg: Purchase complete.
-  _failMsg: Not enough gold.
   _popupTimer: 2
+  _popupDatas:
+  - type: 0
+    message: Purchase Complete..
+    color: {r: 0, g: 1, b: 0, a: 1}
+  - type: 1
+    message: Not Enough Gold.
+    color: {r: 1, g: 0, b: 0, a: 1}
+  - type: 2
+    message: No Selected Item.
+    color: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1813802546
 GameObject:
   m_ObjectHideFlags: 0
@@ -12620,7 +12628,7 @@ MonoBehaviour:
   _interactableLayer:
     serializedVersion: 2
     m_Bits: 512
-  _rayOrigin: {fileID: 1965090835}
+  _rayStartPoint: {fileID: 1965090835}
 --- !u!1 &1967819212
 GameObject:
   m_ObjectHideFlags: 0
