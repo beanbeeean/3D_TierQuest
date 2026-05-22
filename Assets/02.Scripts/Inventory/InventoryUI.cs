@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private bool _isOpened = false;
-    [SerializeField] private GameObject _inventoryPanel;
+    // [SerializeField] private GameObject _inventoryPanel;
     [SerializeField] private Button _closeBtn;
 
     [SerializeField] private PlayerController _controller;
@@ -33,28 +33,46 @@ public class InventoryUI : MonoBehaviour
 
     void OnEnable()
     {
-        _controller.inventoryAction += ToggleInventory;
+        // _controller.inventoryAction += ToggleInventory;
         _inventory.OnInventoryChanged += UpdateInventoryUI;
     }
 
     void OnDisable()
     {
-        _controller.inventoryAction -= ToggleInventory;
+        // _controller.inventoryAction -= ToggleInventory;
         _inventory.OnInventoryChanged -= UpdateInventoryUI;
     }
 
-    void ToggleInventory()
+    public void OpenInventory()
     {
-        _isOpened = !_isOpened;
-        _inventoryPanel.SetActive(_isOpened);
+        if (_isOpened)
+            return;
 
+        _isOpened = true;
+        gameObject.SetActive(true);
+        UpdateInventoryUI();
+    }
+
+    public void CloseInventory()
+    {
+        if (!_isOpened)
+            return;
+
+        _isOpened = false;
+        gameObject.SetActive(false);
+        ResetSelectedSlot();
+    }
+
+    public void ToggleInventory()
+    {
+        Debug.Log("현재 상태 : " + _isOpened);
         if (_isOpened)
         {
-            UpdateInventoryUI();
+            CloseInventory();
         }
         else
         {
-            ResetSelectedSlot();
+            OpenInventory();
         }
     }
 
@@ -80,7 +98,7 @@ public class InventoryUI : MonoBehaviour
         }
         else
         {
-            _itemDetailUI.Initialize(_currentSlot, _inventory, _inventoryPanel);
+            _itemDetailUI.Initialize(_currentSlot, _inventory, gameObject);
         }
     }
 
@@ -88,10 +106,16 @@ public class InventoryUI : MonoBehaviour
     {
         _currentSlotIdx = -1;
         _currentSlot = null;
+
+        if (_itemDetailUI != null)
+        {
+            _itemDetailUI.gameObject.SetActive(false);
+        }
     }
 
     private void OnSlotClicked(int slotIndex)
     {
+        Debug.Log($"슬롯 클릭됨: {slotIndex}");
         if (_currentSlotIdx == slotIndex)
         {
             ResetSelectedSlot();
@@ -123,7 +147,7 @@ public class InventoryUI : MonoBehaviour
         _currentSlot = slot;
 
         _itemDetailUI.gameObject.SetActive(true);
-        _itemDetailUI.Initialize(slot, _inventory, _inventoryPanel);
-        _inventoryPanel.SetActive(false);
+        _itemDetailUI.Initialize(slot, _inventory, gameObject);
+        // _inventoryPanel.SetActive(false);
     }
 }

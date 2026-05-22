@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[System.Serializable]
-public struct ItemData
+[CreateAssetMenu(fileName = "ItemData", menuName = "Item/Item Data")]
+public class ItemData : ScriptableObject
 {
     public ItemType type;
     public string itemId;

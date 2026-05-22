@@ -153,13 +153,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  _itemData:
-    type: 0
-    itemId: item_potion_hp
-    itemName: HP Potion
-    description: A potion that restores the player's HP. \nUsing it recovers 30 HP.
-    icon: {fileID: 21300000, guid: e52ea25af699fd445b7046374f81a5b9, type: 3}
-    value: 30
+  _itemData: {fileID: 11400000, guid: 5a4ab7b71c8ad554994b9bbabc55ddf4, type: 2}
 --- !u!1 &8127973950221792048
 GameObject:
   m_ObjectHideFlags: 0

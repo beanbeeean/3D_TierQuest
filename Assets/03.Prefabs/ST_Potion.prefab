@@ -130,14 +130,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  _itemData:
-    type: 1
-    itemId: item_potion_stamina
-    itemName: Stamina Potion
-    description: A potion that restores the player's Stamina. \nUsing it recovers
-      30 Stamina.
-    icon: {fileID: 21300000, guid: 6592b916f86b19e428db6f6847c7b6dd, type: 3}
-    value: 30
+  _itemData: {fileID: 11400000, guid: f74f06991a4d9774ea26713622fcad98, type: 2}
 --- !u!136 &558408039417767251
 CapsuleCollider:
   m_ObjectHideFlags: 0

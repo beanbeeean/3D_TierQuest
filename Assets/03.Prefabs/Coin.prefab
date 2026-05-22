@@ -185,13 +185,7 @@ MonoBehaviour:
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  _itemData:
-    type: 2
-    itemId: item_gold
-    itemName: Gold
-    description: Shiny gold.\n You can use gold in shops to purchase items.
-    icon: {fileID: 21300000, guid: 3676a0b185daeb54fb257f700ba7ead4, type: 3}
-    value: 100
+  _itemData: {fileID: 11400000, guid: 3f37b4e6b2024bb4f8ca68d4c41fc40d, type: 2}
 --- !u!1 &5786789741238568211
 GameObject:
   m_ObjectHideFlags: 0

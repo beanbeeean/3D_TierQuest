@@ -12,11 +12,24 @@ public class PlayerInventory : MonoBehaviour
     public event Action OnInventoryChanged;
 
     private PlayerStatus _status;
-    
+
     private int _playerGold = 0;
+
+    public int PlayerGold => _playerGold;
+
     void Awake()
     {
         _status = GetComponent<PlayerStatus>();
+    }
+
+    void Start()
+    {
+        SetTestGold();
+    }
+
+    private void SetTestGold()
+    {
+        AddGold(0);
     }
 
     public void AddItem(ItemData itemData, int amount)
@@ -53,7 +66,7 @@ public class PlayerInventory : MonoBehaviour
         switch (currentType)
         {
             case ItemType.HP_Potion:
-                if(_status.CurrentHP >= _status.MaxHP)
+                if (_status.CurrentHP >= _status.MaxHP)
                 {
                     Debug.Log($"<color=red>HP가 이미 최대치입니다.</color>");
                     break;
@@ -62,7 +75,7 @@ public class PlayerInventory : MonoBehaviour
                 _status.Heal(slot.itemData.value);
                 break;
             case ItemType.ST_Potion:
-                if(_status.CurrentSt >= _status.MaxSt)
+                if (_status.CurrentSt >= _status.MaxSt)
                 {
                     Debug.Log($"<color=red>Stamina가 이미 최대치입니다.</color>");
                     break;
@@ -72,9 +85,7 @@ public class PlayerInventory : MonoBehaviour
                 break;
             case ItemType.Currency:
                 slot.amount--;
-                _playerGold += slot.itemData.value;
-                Debug.Log($"gold : {_playerGold}");
-                _goldUI.UpdateGoldHUD(_playerGold);
+                AddGold(slot.itemData.value);
                 break;
             default:
                 break;
@@ -86,5 +97,30 @@ public class PlayerInventory : MonoBehaviour
         }
 
         OnInventoryChanged?.Invoke();
+    }
+    
+
+    public void AddGold(int amount)
+    {
+        if (amount <= 0) return;
+
+        _playerGold += amount;
+        _goldUI.UpdateGoldHUD(_playerGold);
+
+        Debug.Log($"gold : {_playerGold}");
+    }
+
+    public bool CanAfford(int price)
+    {
+        return _playerGold >= price;
+    }
+
+    public void SpendGold(int price)
+    {
+        if (price <= 0)
+            return;
+
+        _playerGold -= price;
+        _goldUI.UpdateGoldHUD(_playerGold);
     }
 }

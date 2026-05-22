@@ -16,6 +16,8 @@ public class InventorySlotUI : MonoBehaviour
     {
         _slotIndex = slotIndex;
         _clickAction = clickAction;
+
+        _slotButton.onClick.RemoveListener(OnClickSlot);
         _slotButton.onClick.AddListener(OnClickSlot);
     }
 

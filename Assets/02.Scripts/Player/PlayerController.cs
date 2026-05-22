@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraSpeed = 5f;
     public Action attackAction;
     public Action inventoryAction;
+    public Action interactAction;
 
     [SerializeField] private InventoryUI _inventory;
 
@@ -112,7 +113,13 @@ public class PlayerController : MonoBehaviour
 
     void OnInventory()
     {
-        inventoryAction?.Invoke();
+        _inventory.ToggleInventory();
+    }
+
+    void OnInteract()
+    {
+        interactAction?.Invoke();
+        Debug.Log("InteractAction");
     }
 
     void HandleRunStamina()

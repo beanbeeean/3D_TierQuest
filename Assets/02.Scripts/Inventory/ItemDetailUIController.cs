@@ -48,7 +48,7 @@ public class ItemDetailUIController : MonoBehaviour
 
     private void CloseDetailUI()
     {
-        _inv.SetActive(true);
+        // _inv.SetActive(true);
         _inv.GetComponentInParent<InventoryUI>().ResetSelectedSlot();
         gameObject.SetActive(false);
     }
